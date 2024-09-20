@@ -33,7 +33,7 @@ Salário Liquido : R$ 935,00
 
 int main() {
     
-    double salarioHora, salarioBruto, salarioLiquido, IR, FGTS, INSS, descontoTotal;
+    double salarioHora, salarioBruto, salarioLiquido, IR, FGTS, INSS, descontoTotal, porcentagemIR;
     int horasTrabalhadas;
     cout << "Insira o valor do salário-hora: ";
     cin >> salarioHora;
@@ -42,7 +42,8 @@ int main() {
     cout << "\n";
     
     salarioBruto = salarioHora*horasTrabalhadas;
-    IR = salarioBruto * ((salarioBruto <= 900) ? 0 : ((salarioBruto <= 1500) ? 0.05 : ((salarioBruto <= 2500) ? 0.10 : 0.20 )));
+    porcentagemIR = ((salarioBruto <= 900) ? 0 : ((salarioBruto <= 1500) ? 0.05 : ((salarioBruto <= 2500) ? 0.10 : 0.20 )));
+    IR = salarioBruto * porcentagemIR;
     INSS = salarioBruto*0.10;
     FGTS = salarioBruto*0.11;
     
@@ -50,7 +51,7 @@ int main() {
     salarioLiquido = salarioBruto - descontoTotal;
     
     cout << "Salário Bruto: (" << salarioHora << " * " << horasTrabalhadas << ") : R$ " << fixed << setprecision(2) << salarioBruto << "\n";
-    cout << "(-) IR (5%) : R$ " << fixed << setprecision(2) << IR << "\n";
+    cout << "(-) IR (" << fixed << setprecision(0) << porcentagemIR*100 << "%) : R$ " << fixed << setprecision(2) << IR << "\n";
     cout << "(-) INSS (10%) : R$ " << fixed << setprecision(2) << INSS << "\n";
     cout << "FGTS (11%) : R$ " << fixed << setprecision(2) << FGTS << "\n";
     cout << "Total de descontos : R$ " << fixed << setprecision(2) << descontoTotal << "\n";
